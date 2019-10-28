@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# TODO: Impliment heapfy.
+# TODO: Impliment heapify.
 class HeapTree(object):
     def __init__(self):
         self.a = []
@@ -65,7 +65,6 @@ def heap_sorted(a):
     return heap.a
 
 def main():
-    h = HeapTree()
     a = [8, 5, 7, 3, 10, 9, 6, 1, 20]
     print(a)
     print(heap_sorted(a))
