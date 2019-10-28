@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# TODO: Implement heap sort
 class HeapTree(object):
     def __init__(self):
         self.a = []
 
     def push(self, value):
         self.a.append(value)
-        # TODO: Extract function
         x = len(self.a) - 1
         while x > 0:
             y = self._parent(x)
@@ -21,13 +19,18 @@ class HeapTree(object):
         n = len(self.a) - 1
         if n == 0:
             return self.a.pop()
-        self.a[0], self.a[n] = self.a[n], self.a[0]
-        # TODO: Extract function
+        self.swapAndSiftDown(n)
+        return self.a.pop()
+
+    # 英語わからん
+    # Swap a[0] and a[end], then reconstruct the tree from 0 to end.
+    def swapAndSiftDown(self, end):
+        self.a[0], self.a[end] = self.a[end], self.a[0]
         x = 0
         left = self._left(x)
         right = self._right(x)
-        while left < n:
-            if right < n and (self.a[right] > self.a[x] or\
+        while left < end:
+            if right < end and (self.a[right] > self.a[x] or\
                               self.a[left] > self.a[x]):
                 if self.a[right] > self.a[left]:
                     self.a[x], self.a[right] = self.a[right], self.a[x]
@@ -42,7 +45,6 @@ class HeapTree(object):
                 break
             left = self._left(x)
             right = self._right(x)
-        return self.a.pop()
 
     def _parent(self, x):
         return (x + 1) // 2 - 1
@@ -53,16 +55,19 @@ class HeapTree(object):
     def _right(self, x):
         return 2 * (x + 1)
 
+def heap_sorted(a):
+    heap = HeapTree()
+    for e in a:
+        heap.push(e)
+    for i in range(len(a) - 1, -1, -1):
+        heap.swapAndSiftDown(i)
+    return heap.a
+
 def main():
     h = HeapTree()
     a = [8, 5, 7, 3, 10, 9, 6, 1, 20]
-    for i in a:
-        print(f'push {i}')
-        h.push(i)
-        print(h.a)
-    for i in a:
-        print(f'h.pop() = {h.pop()}')
-        print(h.a)
+    print(a)
+    print(heap_sorted(a))
 
 if __name__ == '__main__':
     main()
