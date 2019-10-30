@@ -18,12 +18,12 @@ class TreapNode(object):
         self._min = value
 
     def update(self):
-        self._cnt = TreapNode._count(self.left) + \
-            TreapNode._count(self.right) + 1
+        self._cnt = TreapNode.count(self.left) + \
+            TreapNode.count(self.right) + 1
         # TODO
         self._min = min(min(TreapNode.min(self.left),
                             TreapNode.min(self.right)),
-                        self._min)
+                        self.value)
         return self
 
     @classmethod
@@ -42,12 +42,12 @@ class TreapNode(object):
     def split(cls, node, key):
         if node is None:
             return None, None
-        if key <= TreapNode._count(node.left):
+        if key <= TreapNode.count(node.left):
             l, r = TreapNode.split(node.left, key)
             node.left = r
             return l, node.update()
         l, r = TreapNode.split(node.right,
-                               key - TreapNode._count(node.left) - 1)
+                               key - TreapNode.count(node.left) - 1)
         node.right = l
         return node.update(), r
 
@@ -66,7 +66,7 @@ class TreapNode(object):
         return node._min
 
     @classmethod
-    def _count(cls, node):
+    def count(cls, node):
         if node is None:
             return 0
         return node._cnt
@@ -107,14 +107,26 @@ class Treap(object):
                 return node.value
         return None
 
-    def min(self):
-        return TreapNode.min(self._root)
+    def min(self, p, q):
+        if self._root is None:
+            return INF
+        n = TreapNode.count(self._root)
+        x, y = TreapNode.split(self._root, p)
+        z, w = TreapNode.split(y, q - p + 1)
+        ret = TreapNode.min(z)
+        TreapNode.merge(x, TreapNode.merge(z, w))
+        return ret
 
     def traverse(self):
         TreapNode.traverse(self._root)
 
 def main():
-    pass
+    # https://qiita.com/okateim/items/e2f4a734db4e5f90e410
+    a = [10, 2, 5, 7, 11, 15, 1, 9, 3, 15, 13, 4, 7]
+    t = Treap()
+    for i, e in enumerate(a):
+        t.insert(i, e)
+    print(t.min(4, 8))
 
 if __name__ == '__main__':
     main()
