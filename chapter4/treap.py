@@ -92,8 +92,8 @@ class Treap(object):
         self._root = TreapNode.merge(TreapNode.merge(left, node), right)
 
     def erase(self, key):
-        left, tmp = TreeNode.split(self._root, key - 1)
-        mid, right = TreeNode.split(tmp, key)
+        left, tmp = TreapNode.split(self._root, key - 1)
+        mid, right = TreapNode.split(tmp, key - TreapNode.count(left))
         self._root = TreapNode.merge(left, right)
 
     def find(self, key):
