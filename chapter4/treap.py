@@ -20,7 +20,6 @@ class TreapNode(object):
     def update(self):
         self._cnt = TreapNode.count(self.left) + \
             TreapNode.count(self.right) + 1
-        # TODO
         self._min = min(min(TreapNode.min(self.left),
                             TreapNode.min(self.right)),
                         self.value)
