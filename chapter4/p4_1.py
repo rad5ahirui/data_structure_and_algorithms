@@ -17,6 +17,9 @@ class T(rbst.Rbst):
         N.p(self._root, 0)
 
 def main():
+    # The array is already sorted and the size is small, so you can easily
+    # construct a balanced binary search tree by hand
+    # (子として真ん中の要素を値とするノードを追加し続ければいい).
     a = [
         3, 5, 7, 10, 15, 16, 18, 19, 20,
         23, 24, 33, 35, 40, 41, 42, 46,
