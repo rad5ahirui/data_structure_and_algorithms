@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Just use list in Python.
 class Stack(object):
     def __init__(self, n):
         self.a = [None] * n

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Use collections.deque or queue.Queue in Python.
 class Queue(object):
     def __init__(self, n):
         self.a = [None] * n
