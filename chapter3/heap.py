@@ -63,6 +63,9 @@ class HeapTree(object):
     def _right(self, x):
         return 2 * (x + 1)
 
+    def __len__(self):
+        return len(self.a)
+
 def heap_sorted(a):
     heap = HeapTree()
     for e in a:
